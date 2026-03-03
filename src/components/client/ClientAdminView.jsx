@@ -45,7 +45,7 @@ function SsoStatusBlock({ client, onRenew, t }) {
 
   return (
     <div className="detail-card" style={{ maxWidth: 520 }}>
-      <div className="detail-card-title" style={{ fontSize: '1.125rem' }}>
+      <div className="detail-card-title">
         {t('cv_title')}
       </div>
 
@@ -200,7 +200,7 @@ function RenewModal({ client, onClose, t }) {
 function WhitelistBlock({ client, t }) {
   return (
     <div className="detail-card" style={{ maxWidth: 520 }}>
-      <div className="detail-card-title" style={{ fontSize: '1.125rem' }}>
+      <div className="detail-card-title">
         {t('cv_title')}
       </div>
       <div style={{

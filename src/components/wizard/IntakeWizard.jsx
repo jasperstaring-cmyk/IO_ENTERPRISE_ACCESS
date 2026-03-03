@@ -126,7 +126,7 @@ export default function IntakeWizard({ onComplete, onCancel }) {
         ))}
       </div>
 
-      <div style={{ fontSize: '0.7rem', color: '#8A8A82', marginBottom: '0.25rem', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+      <div style={{ fontSize: '0.7rem', color: '#8A8A82', marginBottom: '0.25rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
         {t(STEP_LABELS[stepKey])} — {currentStep + 1} / {totalSteps}
       </div>
 

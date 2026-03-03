@@ -227,7 +227,7 @@ export default function EnterpriseRequest({ onCancel }) {
           marginTop: '1rem', padding: '1rem 1.25rem', borderRadius: '8px',
           border: '1.5px solid var(--navy)', background: 'rgba(12,24,46,0.02)',
         }}>
-          <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1.125rem', color: 'var(--navy)', marginBottom: '0.75rem', lineHeight: 'var(--lh-heading)' }}>
+          <div style={{ fontFamily: 'var(--font-sans)', fontWeight: 800, fontSize: '1.125rem', color: 'var(--navy)', marginBottom: '0.75rem', lineHeight: 'var(--lh-heading)' }}>
             {selected.legal}
           </div>
           <Row label={t('req_address')}>{selected.address}</Row>

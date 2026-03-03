@@ -34,7 +34,7 @@ export default function Sidebar({ view, setView, alertCount }) {
       <div className="admin-sidebar-section">{t('sidebar_section_view')}</div>
       <NavBtn id="client-view" label="sidebar_client_admin" />
 
-      <div className="admin-sidebar-section">LANGUAGE</div>
+      <div className="admin-sidebar-section">{t('sidebar_section_language')}</div>
       <div style={{ display: 'flex', gap: '0.25rem', padding: '0 1.5rem' }}>
         {languages.map(l => (
           <button key={l.code} onClick={() => setLang(l.code)} className={`lang-btn ${lang === l.code ? 'active' : ''}`}>

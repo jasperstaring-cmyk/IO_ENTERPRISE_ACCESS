@@ -59,7 +59,7 @@ export default function ClientDetail({ client, onBack }) {
         </button>
         <div>
           <h2 style={{
-            fontSize: '1.25rem', fontWeight: 800, color: 'var(--navy)',
+            fontSize: '1.375rem', fontWeight: 800, color: 'var(--navy)',
             lineHeight: 1.3, margin: 0,
           }}>
             {client.name}
