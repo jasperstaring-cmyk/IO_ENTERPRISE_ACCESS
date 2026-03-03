@@ -105,18 +105,6 @@ const COUNTRIES = [
   { code: "VN", label: "Vietnam" },
 ]
 
-function SectionTitle({ children }) {
-  return (
-    <div style={{
-      fontSize: '1.0625rem', fontWeight: 800, color: 'var(--navy)',
-      paddingBottom: '0.5rem', marginBottom: '1rem', marginTop: '2rem',
-      borderBottom: '2px solid var(--navy)',
-    }}>
-      {children}
-    </div>
-  )
-}
-
 function Row({ label, children }) {
   return (
     <div className="detail-row">
@@ -167,7 +155,7 @@ export default function EnterpriseRequest({ onCancel }) {
       <div className="detail-card" style={{ maxWidth: 600, textAlign: 'center', padding: '3rem 2rem' }}>
         <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>&#9989;</div>
         <h2 className="wizard-step-title">{t('req_submitted_title')}</h2>
-        <p style={{ color: 'var(--gray-500)', fontSize: '0.9375rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
+        <p className="detail-card-sub" style={{ maxWidth: 'none', marginBottom: '1.5rem' }}>
           {t('req_submitted_msg')}
         </p>
         <button className="btn-primary" onClick={onCancel}>{t('btn_close')}</button>
@@ -177,15 +165,13 @@ export default function EnterpriseRequest({ onCancel }) {
 
   return (
     <div className="detail-card" style={{ maxWidth: 640 }}>
-      <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--navy)', margin: '0 0 0.25rem' }}>
-        {t('topbar_request')}
-      </h2>
-      <p style={{ color: 'var(--gray-500)', fontSize: '0.875rem', margin: '0 0 0.5rem', lineHeight: 1.5 }}>
-        {t('req_form_intro')}
-      </p>
+      <div className="detail-card-header" style={{ display: 'block' }}>
+        <h2 className="detail-card-title">{t('topbar_request')}</h2>
+        <p className="detail-card-sub">{t('req_form_intro')}</p>
+      </div>
 
       {/* Section 1: Organisation */}
-      <SectionTitle>{t('req_org_title')}</SectionTitle>
+      <div className="section-title">{t('req_org_title')}</div>
 
       <div className="input-group">
         <label className="input-label">{t('req_country')}</label>
@@ -200,7 +186,7 @@ export default function EnterpriseRequest({ onCancel }) {
       </div>
 
       {country && (
-        <div className="input-group" style={{ position: 'relative', marginTop: '1rem' }}>
+        <div className="input-group" style={{ position: 'relative' }}>
           <label className="input-label">{t('req_search_company')}</label>
           <input type="text" className="input-field"
             placeholder={t('req_search_ph')}
@@ -214,7 +200,7 @@ export default function EnterpriseRequest({ onCancel }) {
             <div style={{
               position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 10,
               background: '#fff', border: '1.5px solid var(--gray-300)', borderRadius: '6px',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.12)', maxHeight: 280, overflowY: 'auto',
+              boxShadow: '0 4px 16px rgba(12,24,46,0.12)', maxHeight: 280, overflowY: 'auto',
             }}>
               {results.map((c, i) => (
                 <button key={i} type="button" onClick={() => handleSelect(c)}
@@ -241,7 +227,7 @@ export default function EnterpriseRequest({ onCancel }) {
           marginTop: '1rem', padding: '1rem 1.25rem', borderRadius: '8px',
           border: '1.5px solid var(--navy)', background: 'rgba(12,24,46,0.02)',
         }}>
-          <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--navy)', marginBottom: '0.75rem' }}>
+          <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1.125rem', color: 'var(--navy)', marginBottom: '0.75rem', lineHeight: 'var(--lh-heading)' }}>
             {selected.legal}
           </div>
           <Row label={t('req_address')}>{selected.address}</Row>
@@ -252,8 +238,8 @@ export default function EnterpriseRequest({ onCancel }) {
       )}
 
       {/* Section 2: Contact */}
-      <SectionTitle>{t('req_contact_title')}</SectionTitle>
-      <p style={{ color: 'var(--gray-500)', fontSize: '0.8125rem', marginTop: '-0.5rem', marginBottom: '1rem' }}>
+      <div className="section-title">{t('req_contact_title')}</div>
+      <p className="detail-card-sub" style={{ marginTop: '-0.5rem', marginBottom: '1rem' }}>
         {t('req_contact_sub')}
       </p>
 
@@ -262,7 +248,7 @@ export default function EnterpriseRequest({ onCancel }) {
         <input type="text" className="input-field" value={contact.name}
           onChange={e => setContact({...contact, name: e.target.value})} />
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 1rem' }}>
         <div className="input-group">
           <label className="input-label">{t('wiz_contact_email')}</label>
           <input type="email" className="input-field" value={contact.email}
@@ -276,7 +262,7 @@ export default function EnterpriseRequest({ onCancel }) {
       </div>
 
       {/* Section 3: Access */}
-      <SectionTitle>{t('req_access_title')}</SectionTitle>
+      <div className="section-title">{t('req_access_title')}</div>
 
       <div className="input-group" style={{ marginBottom: '1.25rem' }}>
         <label className="input-label">{t('req_access_type')}</label>
@@ -358,9 +344,9 @@ export default function EnterpriseRequest({ onCancel }) {
         <div className="alert alert-info" style={{ marginBottom: '1rem' }}>
           {t('req_review_note')}
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <button className="btn-secondary" onClick={onCancel}>{t('btn_cancel')}</button>
-          <button className="btn-primary" disabled={!canSubmit} onClick={() => setSubmitted(true)}>
+        <div className="reg-nav-bar">
+          <button className="btn-back" onClick={onCancel}>{t('btn_cancel')}</button>
+          <button className="btn-primary btn-full" disabled={!canSubmit} onClick={() => setSubmitted(true)}>
             {t('req_submit')}
           </button>
         </div>
