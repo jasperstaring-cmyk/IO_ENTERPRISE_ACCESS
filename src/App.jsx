@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { I18nProvider, useI18n } from "./i18n"
-import Sidebar from "./components/shared/Sidebar"
+import DemoBanner from "./components/shared/DemoBanner"
 import ClientOverview from "./components/admin/ClientOverview"
 import ClientDetail from "./components/admin/ClientDetail"
 import AlertsDashboard from "./components/admin/AlertsDashboard"
@@ -27,13 +27,12 @@ function AppContent() {
 
   return (
     <div className="admin-layout">
-      <Sidebar view={view} setView={setView} alertCount={2} />
+      <DemoBanner view={view} setView={setView} alertCount={2} />
       <main className="admin-main">
         <div className="admin-topbar">
           <div className="admin-topbar-title">{topbarTitle}</div>
         </div>
         <div className="admin-content">
-          <div className="demo-hint"><strong>{t("demo_badge")}</strong> {t("demo_hint")}</div>
           {view === "request" && <EnterpriseRequest onCancel={() => setView("overview")} />}
           {view === "overview" && <ClientOverview onSelectClient={handleSelectClient} />}
           {view === "detail" && selectedClient && <ClientDetail client={selectedClient} onBack={handleBack} />}

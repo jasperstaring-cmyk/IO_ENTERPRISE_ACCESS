@@ -1,95 +1,189 @@
-/* ═══════════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    Enterprise Access Admin — IO UI Style Reference compliant
-   All values from IO_UI_Style_Reference.md and global.css tokens
-   ═══════════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 
-/* ─── Admin layout (based on Account-layout pattern, section 4.2) ──────────── */
+/* --- Admin layout (vertical stack: demo banner > topbar > content) --------- */
 .admin-layout {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background: var(--gray-50);
 }
 
-/* ─── Admin sidebar (Account navigatie-sidebar pattern, section 4.2) ───────── */
-.admin-sidebar {
-  width: 260px;
-  flex-shrink: 0;
-  background: white;
-  border-radius: 0;
-  padding: 1.5rem 0;
-  border-right: 1px solid var(--gray-100);
-  box-shadow: 1px 0 6px rgba(12,24,46,0.06);
+/* --- Demo banner (collapsible navy bar at top) ----------------------------- */
+.demo-banner-wrapper {
   position: sticky;
   top: 0;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-.admin-sidebar-logo {
-  font-family: var(--font-serif);
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--navy);
-  padding: 0.5rem 1.5rem 1.25rem;
-  line-height: var(--lh-heading);
-  letter-spacing: var(--tracking-heading);
-}
-
-.admin-sidebar-section {
+  z-index: 100;
   font-family: var(--font-sans);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gray-500);
-  padding: 1.25rem 1.5rem 0.5rem;
 }
 
-.admin-sidebar-item {
+.demo-banner-bar {
+  background: var(--navy);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  height: 40px;
+  gap: 1rem;
+}
+
+.demo-banner-left {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  width: calc(100% - 1.5rem);
-  margin: 0 0.75rem;
-  padding: 0.625rem 0.75rem;
-  border-radius: 6px;
-  border: none;
-  background: transparent;
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: var(--gray-700);
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-  text-align: left;
-}
-.admin-sidebar-item:hover {
-  background: var(--gray-50);
-  color: var(--navy);
-}
-.admin-sidebar-item.active {
-  background: var(--gray-50);
-  font-weight: 700;
-  color: var(--navy);
+  min-width: 0;
+  flex: 1;
 }
 
-.admin-sidebar-badge {
-  margin-left: auto;
-  background: var(--red);
-  color: #fff;
-  font-family: var(--font-sans);
+.demo-banner-badge {
   font-size: 0.6875rem;
   font-weight: 700;
-  min-width: 20px;
-  height: 20px;
-  border-radius: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--red);
+  color: #fff;
+  padding: 0.175rem 0.5rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.demo-banner-hint {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.demo-banner-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.demo-banner-lang {
+  display: flex;
+  gap: 2px;
+}
+
+.demo-lang-btn {
+  padding: 0.2rem 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px;
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.demo-lang-btn:hover {
+  border-color: rgba(255,255,255,0.5);
+  color: #fff;
+}
+.demo-lang-btn.active {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.4);
+  color: #fff;
+}
+
+.demo-banner-toggle {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  width: 28px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.375rem;
+  transition: all 0.15s;
+}
+.demo-banner-toggle:hover {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
 }
 
-/* ─── Admin main content area ──────────────────────────────────────────────── */
+/* --- Expanded panel --- */
+.demo-banner-panel {
+  background: var(--navy);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+.demo-banner-panel.open {
+  max-height: 300px;
+}
+
+.demo-banner-panel-inner {
+  display: flex;
+  gap: 2.5rem;
+  padding: 0.75rem 1.5rem 1rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.demo-banner-group-label {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 0.375rem;
+}
+
+.demo-banner-group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.demo-banner-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0.3rem 0.625rem;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  white-space: nowrap;
+}
+.demo-banner-item:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+.demo-banner-item.active {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-weight: 600;
+}
+
+.demo-banner-item-badge {
+  background: var(--red);
+  color: #fff;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  padding: 0.05rem 0.35rem;
+  border-radius: 6px;
+  min-width: 14px;
+  text-align: center;
+}
+
+/* --- Admin main content area ----------------------------------------------- */
 .admin-main {
   flex: 1;
   min-width: 0;
@@ -99,7 +193,7 @@
 
 .admin-topbar {
   position: sticky;
-  top: 0;
+  top: 40px;
   z-index: 50;
   background: white;
   border-bottom: 1px solid var(--gray-100);
@@ -126,7 +220,7 @@
   width: 100%;
 }
 
-/* ─── Content card (SectionCard pattern, section 4.3) ──────────────────────── */
+/* --- Content card (SectionCard pattern) ------------------------------------ */
 .detail-card {
   background: white;
   border-radius: 10px;
@@ -134,14 +228,12 @@
   box-shadow: 0 2px 16px rgba(12,24,46,0.06);
   margin-bottom: 1.25rem;
 }
-
 .detail-card-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 1.25rem;
 }
-
 .detail-card-title {
   font-family: var(--font-sans);
   font-size: 1.375rem;
@@ -150,7 +242,6 @@
   line-height: var(--lh-heading);
   letter-spacing: var(--tracking-heading);
 }
-
 .detail-card-sub {
   font-family: var(--font-sans);
   font-size: 0.875rem;
@@ -160,7 +251,7 @@
   line-height: var(--lh-body);
 }
 
-/* ─── Detail rows (key-value pairs) ────────────────────────────────────────── */
+/* --- Detail rows ---------------------------------------------------------- */
 .detail-row {
   display: flex;
   align-items: baseline;
@@ -169,7 +260,6 @@
   font-size: 0.9375rem;
   line-height: var(--lh-body);
 }
-
 .detail-label {
   width: 180px;
   flex-shrink: 0;
@@ -179,19 +269,15 @@
   text-transform: uppercase;
   color: var(--gray-500);
 }
+.detail-value { color: var(--navy); }
 
-.detail-value {
-  color: var(--navy);
-}
-
-/* ─── Tabs (section 10) ────────────────────────────────────────────────────── */
+/* --- Tabs ----------------------------------------------------------------- */
 .tab-bar {
   display: flex;
   gap: 0;
   border-bottom: 1px solid var(--gray-200);
   margin-bottom: 1.25rem;
 }
-
 .tab-btn {
   background: none;
   border: none;
@@ -205,16 +291,14 @@
   margin-bottom: -1px;
   transition: color 0.15s, border-color 0.15s;
 }
-.tab-btn:hover {
-  color: var(--navy);
-}
+.tab-btn:hover { color: var(--navy); }
 .tab-btn.active {
   font-weight: 700;
   color: var(--navy);
   border-bottom-color: var(--navy);
 }
 
-/* ─── Badges ───────────────────────────────────────────────────────────────── */
+/* --- Badges --------------------------------------------------------------- */
 .badge {
   display: inline-block;
   font-family: var(--font-sans);
@@ -230,7 +314,7 @@
 .badge-blue   { background: rgba(123,159,224,0.12); color: #1A3A7A; border: 1px solid #7B9FE0; }
 .badge-navy   { background: rgba(12,24,46,0.08); color: var(--navy); border: 1px solid var(--navy); }
 
-/* ─── Edition pills ────────────────────────────────────────────────────────── */
+/* --- Edition pills -------------------------------------------------------- */
 .edition-pill {
   display: inline-block;
   font-family: var(--font-sans);
@@ -245,7 +329,7 @@
   margin-right: 0.25rem;
 }
 
-/* ─── Selection rows (section 6.1) ─────────────────────────────────────────── */
+/* --- Selection rows ------------------------------------------------------- */
 .sel-row {
   display: flex;
   gap: 0.875rem;
@@ -270,7 +354,6 @@
   background: rgba(12,24,46,0.02);
   box-shadow: 0 0 0 1.5px rgba(12,24,46,0.08);
 }
-
 .sel-dot {
   width: 22px;
   height: 22px;
@@ -287,14 +370,12 @@
   background: var(--navy);
   border-color: var(--navy);
 }
-
 .sel-row-name {
   font-family: var(--font-sans);
   font-size: 0.9375rem;
   font-weight: 700;
   color: var(--navy);
 }
-
 .sel-row-desc {
   font-family: var(--font-sans);
   font-size: 0.8125rem;
@@ -303,23 +384,16 @@
   margin-top: 0.125rem;
 }
 
-/* ─── Wizard progress segments ─────────────────────────────────────────────── */
-.wizard-progress {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 1.25rem;
-}
+/* --- Wizard progress ------------------------------------------------------ */
+.wizard-progress { display: flex; gap: 4px; margin-bottom: 1.25rem; }
 .wizard-seg {
-  flex: 1;
-  height: 4px;
-  background: var(--gray-200);
-  border-radius: 2px;
-  transition: background 0.3s;
+  flex: 1; height: 4px; background: var(--gray-200);
+  border-radius: 2px; transition: background 0.3s;
 }
 .wizard-seg.done    { background: var(--navy); }
 .wizard-seg.current { background: var(--red); }
 
-/* ─── Wizard step titles ───────────────────────────────────────────────────── */
+/* --- Wizard step titles --------------------------------------------------- */
 .wizard-step-title {
   font-family: var(--font-sans);
   font-size: 1.375rem;
@@ -337,18 +411,11 @@
   line-height: var(--lh-body);
 }
 
-/* ─── Wizard navigation (section 15) ──────────────────────────────────────── */
-.wizard-nav {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 2rem;
-}
-.wizard-nav .btn-primary,
-.wizard-nav .btn-green {
-  flex: 1;
-}
+/* --- Wizard nav ----------------------------------------------------------- */
+.wizard-nav { display: flex; gap: 0.75rem; margin-top: 2rem; }
+.wizard-nav .btn-primary, .wizard-nav .btn-green { flex: 1; }
 
-/* ─── Section divider title (for request form sections) ────────────────────── */
+/* --- Section divider title ------------------------------------------------ */
 .section-title {
   font-family: var(--font-sans);
   font-size: 1.0625rem;
@@ -362,90 +429,34 @@
   letter-spacing: var(--tracking-heading);
 }
 
-/* ─── Table styles ─────────────────────────────────────────────────────────── */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-}
+/* --- Data table ----------------------------------------------------------- */
+.data-table { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 0.875rem; }
 .data-table th {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gray-500);
-  text-align: left;
-  padding: 0.625rem 0.75rem;
-  border-bottom: 1px solid var(--gray-200);
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--gray-500); text-align: left;
+  padding: 0.625rem 0.75rem; border-bottom: 1px solid var(--gray-200);
 }
 .data-table td {
-  padding: 0.75rem 0.75rem;
-  border-bottom: 1px solid var(--gray-100);
-  color: var(--navy);
-  vertical-align: middle;
+  padding: 0.75rem 0.75rem; border-bottom: 1px solid var(--gray-100);
+  color: var(--navy); vertical-align: middle;
 }
-.data-table tr {
-  cursor: pointer;
-  transition: background 0.1s;
-}
-.data-table tr:hover {
-  background: var(--gray-50);
-}
+.data-table tr { cursor: pointer; transition: background 0.1s; }
+.data-table tr:hover { background: var(--gray-50); }
 
-/* ─── Toggle switch (section 11) ───────────────────────────────────────────── */
+/* --- Toggle switch -------------------------------------------------------- */
 .toggle-switch {
-  position: relative;
-  width: 48px;
-  height: 26px;
-  border-radius: 13px;
-  cursor: pointer;
-  transition: background 0.2s;
-  border: none;
-  padding: 0;
+  position: relative; width: 48px; height: 26px; border-radius: 13px;
+  cursor: pointer; transition: background 0.2s; border: none; padding: 0;
 }
 .toggle-switch.on  { background: var(--green); }
 .toggle-switch.off { background: var(--gray-300); }
 .toggle-knob {
-  position: absolute;
-  top: 3px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-  transition: left 0.2s;
+  position: absolute; top: 3px; width: 20px; height: 20px;
+  border-radius: 50%; background: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2); transition: left 0.2s;
 }
 .toggle-switch.on  .toggle-knob { left: 25px; }
 .toggle-switch.off .toggle-knob { left: 3px; }
 
-/* ─── Search bar ───────────────────────────────────────────────────────────── */
-.search-bar {
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
-  align-items: center;
-}
-
-/* ─── Language switcher (admin sidebar) ────────────────────────────────────── */
-.lang-btn {
-  padding: 0.375rem 0.5rem;
-  border-radius: 4px;
-  border: 1.5px solid var(--gray-200);
-  background: transparent;
-  color: var(--gray-500);
-  font-family: var(--font-sans);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: border-color 0.15s, background 0.15s, color 0.15s;
-}
-.lang-btn:hover {
-  border-color: var(--gray-500);
-  color: var(--navy);
-}
-.lang-btn.active {
-  border-color: var(--navy);
-  background: rgba(12,24,46,0.04);
-  color: var(--navy);
-}
+/* --- Search bar ----------------------------------------------------------- */
+.search-bar { display: flex; gap: 0.75rem; margin-bottom: 1.25rem; align-items: center; }
