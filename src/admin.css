@@ -2,7 +2,7 @@
    Enterprise Access Admin — IO UI Style Reference compliant
    ============================================================================= */
 
-/* --- Admin layout (vertical stack: demo banner > topbar > content) --------- */
+/* --- Admin layout (vertical stack) ---------------------------------------- */
 .admin-layout {
   display: flex;
   flex-direction: column;
@@ -10,7 +10,9 @@
   background: var(--gray-50);
 }
 
-/* --- Demo banner (collapsible navy bar at top) ----------------------------- */
+/* =============================================================================
+   DEMO BANNER — matches registration POC pattern
+   ============================================================================= */
 .demo-banner-wrapper {
   position: sticky;
   top: 0;
@@ -18,101 +20,88 @@
   font-family: var(--font-sans);
 }
 
+/* Green gradient accent line at very top */
+.demo-banner-accent {
+  height: 3px;
+  background: linear-gradient(90deg, #4ED596 0%, #2BA86A 50%, #4ED596 100%);
+}
+
+/* Main collapsed bar */
 .demo-banner-bar {
   background: var(--navy);
-  color: #fff;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 1.5rem;
+  justify-content: center;
   height: 40px;
-  gap: 1rem;
+  padding: 0 1rem;
 }
 
-.demo-banner-left {
+/* Centered toggle group */
+.demo-banner-center {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  min-width: 0;
-  flex: 1;
 }
 
-.demo-banner-badge {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  background: var(--red);
-  color: #fff;
-  padding: 0.175rem 0.5rem;
-  border-radius: 3px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.demo-banner-hint {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.55);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
-}
-
-.demo-banner-right {
-  display: flex;
+/* Toggle button: [POC] SHOW TEST PANEL v */
+.demo-banner-toggle {
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
-}
-
-.demo-banner-lang {
-  display: flex;
-  gap: 2px;
-}
-
-.demo-lang-btn {
-  padding: 0.2rem 0.4rem;
-  font-family: var(--font-sans);
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 3px;
-  background: transparent;
-  color: rgba(255,255,255,0.5);
+  gap: 0.5rem;
+  background: none;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  padding: 0.3rem 0.75rem;
+  color: rgba(255,255,255,0.8);
   cursor: pointer;
   transition: all 0.15s;
+  font-family: var(--font-sans);
 }
-.demo-lang-btn:hover {
-  border-color: rgba(255,255,255,0.5);
-  color: #fff;
-}
-.demo-lang-btn.active {
-  background: rgba(255,255,255,0.12);
+.demo-banner-toggle:hover {
   border-color: rgba(255,255,255,0.4);
   color: #fff;
 }
 
-.demo-banner-toggle {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 4px;
-  color: rgba(255,255,255,0.7);
-  cursor: pointer;
-  width: 28px;
-  height: 24px;
-  display: flex;
+.demo-banner-badge {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--green);
+  color: var(--navy);
+  padding: 0.125rem 0.4rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.demo-banner-toggle-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* POC Guide button */
+.demo-banner-guide-btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  background: none;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  padding: 0.3rem 0.75rem;
+  color: rgba(255,255,255,0.8);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   transition: all 0.15s;
 }
-.demo-banner-toggle:hover {
-  background: rgba(255,255,255,0.15);
+.demo-banner-guide-btn:hover {
+  border-color: rgba(255,255,255,0.4);
   color: #fff;
 }
 
-/* --- Expanded panel --- */
+/* --- Expanded panel ------------------------------------------------------- */
 .demo-banner-panel {
   background: var(--navy);
   overflow: hidden;
@@ -120,59 +109,73 @@
   transition: max-height 0.3s ease;
 }
 .demo-banner-panel.open {
-  max-height: 300px;
+  max-height: 500px;
 }
 
 .demo-banner-panel-inner {
   display: flex;
-  gap: 2.5rem;
-  padding: 0.75rem 1.5rem 1rem;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  gap: 3rem;
+  padding: 1.25rem 2rem 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
 
-.demo-banner-group-label {
+/* Columns */
+.demo-banner-col { min-width: 0; }
+.demo-banner-col-wide { flex: 1; }
+
+.demo-banner-col-label {
   font-size: 0.5625rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  margin-bottom: 0.375rem;
+  color: var(--red);
+  margin-bottom: 0.625rem;
 }
 
-.demo-banner-group-items {
+/* Scenario items */
+.demo-banner-scenarios {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.demo-banner-item {
+.demo-banner-scenario {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
   background: none;
   border: none;
-  padding: 0.3rem 0.625rem;
-  border-radius: 4px;
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 400;
-  color: rgba(255,255,255,0.65);
+  padding: 0.4rem 0.75rem;
+  border-radius: 5px;
+  border-left: 2px solid transparent;
   cursor: pointer;
   transition: all 0.15s;
   text-align: left;
-  white-space: nowrap;
+  font-family: var(--font-sans);
 }
-.demo-banner-item:hover {
+.demo-banner-scenario:hover {
+  background: rgba(255,255,255,0.04);
+  border-left-color: rgba(255,255,255,0.2);
+}
+.demo-banner-scenario.active {
   background: rgba(255,255,255,0.08);
-  color: #fff;
-}
-.demo-banner-item.active {
-  background: rgba(255,255,255,0.12);
-  color: #fff;
-  font-weight: 600;
+  border-left-color: var(--green);
 }
 
-.demo-banner-item-badge {
+.demo-banner-scenario-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--green);
+  white-space: nowrap;
+}
+.demo-banner-scenario.active .demo-banner-scenario-name {
+  color: #fff;
+}
+
+.demo-banner-scenario-badge {
   background: var(--red);
   color: #fff;
   font-size: 0.5625rem;
@@ -183,7 +186,43 @@
   text-align: center;
 }
 
-/* --- Admin main content area ----------------------------------------------- */
+.demo-banner-scenario-desc {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.125rem;
+}
+
+/* Language grid */
+.demo-banner-lang-grid {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.demo-lang-btn {
+  padding: 0.35rem 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.demo-lang-btn:hover {
+  border-color: rgba(255,255,255,0.4);
+  color: #fff;
+}
+.demo-lang-btn.active {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.4);
+  color: #fff;
+}
+
+/* =============================================================================
+   ADMIN CONTENT AREA
+   ============================================================================= */
 .admin-main {
   flex: 1;
   min-width: 0;
@@ -193,7 +232,7 @@
 
 .admin-topbar {
   position: sticky;
-  top: 40px;
+  top: 43px;
   z-index: 50;
   background: white;
   border-bottom: 1px solid var(--gray-100);
@@ -355,60 +394,30 @@
   box-shadow: 0 0 0 1.5px rgba(12,24,46,0.08);
 }
 .sel-dot {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 2px solid var(--gray-300);
-  background: white;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 2px solid var(--gray-300); background: white; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
   transition: background 0.15s, border-color 0.15s;
 }
-.sel-dot.checked {
-  background: var(--navy);
-  border-color: var(--navy);
-}
-.sel-row-name {
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--navy);
-}
-.sel-row-desc {
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  color: var(--gray-500);
-  line-height: 1.5;
-  margin-top: 0.125rem;
-}
+.sel-dot.checked { background: var(--navy); border-color: var(--navy); }
+.sel-row-name { font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 700; color: var(--navy); }
+.sel-row-desc { font-family: var(--font-sans); font-size: 0.8125rem; color: var(--gray-500); line-height: 1.5; margin-top: 0.125rem; }
 
 /* --- Wizard progress ------------------------------------------------------ */
 .wizard-progress { display: flex; gap: 4px; margin-bottom: 1.25rem; }
-.wizard-seg {
-  flex: 1; height: 4px; background: var(--gray-200);
-  border-radius: 2px; transition: background 0.3s;
-}
+.wizard-seg { flex: 1; height: 4px; background: var(--gray-200); border-radius: 2px; transition: background 0.3s; }
 .wizard-seg.done    { background: var(--navy); }
 .wizard-seg.current { background: var(--red); }
 
 /* --- Wizard step titles --------------------------------------------------- */
 .wizard-step-title {
-  font-family: var(--font-sans);
-  font-size: 1.375rem;
-  font-weight: 800;
-  line-height: var(--lh-heading);
-  letter-spacing: var(--tracking-heading);
-  color: var(--navy);
-  margin-bottom: 0.25rem;
+  font-family: var(--font-sans); font-size: 1.375rem; font-weight: 800;
+  line-height: var(--lh-heading); letter-spacing: var(--tracking-heading);
+  color: var(--navy); margin-bottom: 0.25rem;
 }
 .wizard-step-sub {
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  color: var(--gray-500);
-  margin-bottom: 1.5rem;
-  line-height: var(--lh-body);
+  font-family: var(--font-sans); font-size: 0.875rem; color: var(--gray-500);
+  margin-bottom: 1.5rem; line-height: var(--lh-body);
 }
 
 /* --- Wizard nav ----------------------------------------------------------- */
@@ -417,15 +426,9 @@
 
 /* --- Section divider title ------------------------------------------------ */
 .section-title {
-  font-family: var(--font-sans);
-  font-size: 1.0625rem;
-  font-weight: 800;
-  color: var(--navy);
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-  border-bottom: 2px solid var(--navy);
-  line-height: var(--lh-heading);
+  font-family: var(--font-sans); font-size: 1.0625rem; font-weight: 800;
+  color: var(--navy); padding-bottom: 0.5rem; margin-bottom: 1rem; margin-top: 2rem;
+  border-bottom: 2px solid var(--navy); line-height: var(--lh-heading);
   letter-spacing: var(--tracking-heading);
 }
 
@@ -436,25 +439,15 @@
   text-transform: uppercase; color: var(--gray-500); text-align: left;
   padding: 0.625rem 0.75rem; border-bottom: 1px solid var(--gray-200);
 }
-.data-table td {
-  padding: 0.75rem 0.75rem; border-bottom: 1px solid var(--gray-100);
-  color: var(--navy); vertical-align: middle;
-}
+.data-table td { padding: 0.75rem 0.75rem; border-bottom: 1px solid var(--gray-100); color: var(--navy); vertical-align: middle; }
 .data-table tr { cursor: pointer; transition: background 0.1s; }
 .data-table tr:hover { background: var(--gray-50); }
 
 /* --- Toggle switch -------------------------------------------------------- */
-.toggle-switch {
-  position: relative; width: 48px; height: 26px; border-radius: 13px;
-  cursor: pointer; transition: background 0.2s; border: none; padding: 0;
-}
+.toggle-switch { position: relative; width: 48px; height: 26px; border-radius: 13px; cursor: pointer; transition: background 0.2s; border: none; padding: 0; }
 .toggle-switch.on  { background: var(--green); }
 .toggle-switch.off { background: var(--gray-300); }
-.toggle-knob {
-  position: absolute; top: 3px; width: 20px; height: 20px;
-  border-radius: 50%; background: white;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2); transition: left 0.2s;
-}
+.toggle-knob { position: absolute; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: white; box-shadow: 0 1px 4px rgba(0,0,0,0.2); transition: left 0.2s; }
 .toggle-switch.on  .toggle-knob { left: 25px; }
 .toggle-switch.off .toggle-knob { left: 3px; }
 
