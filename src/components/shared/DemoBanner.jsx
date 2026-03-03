@@ -62,7 +62,7 @@ export default function DemoBanner({ view, setView, alertCount }) {
                 <button
                   key={item.id}
                   className={`demo-banner-scenario ${view === item.id ? 'active' : ''}`}
-                  onClick={() => { setView(item.id); setOpen(false) }}
+                  onClick={() => setView(item.id)}
                 >
                   <span className="demo-banner-scenario-name">
                     {item.label}
