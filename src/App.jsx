@@ -13,15 +13,6 @@ function AppContent() {
   const [view, setView] = useState("request")
   const [selectedClient, setSelectedClient] = useState(null)
 
-  const topbarTitle = {
-    request: t("topbar_request"),
-    overview: t("topbar_overview"),
-    detail: t("topbar_detail"),
-    wizard: t("topbar_wizard"),
-    alerts: t("topbar_alerts"),
-    "client-view": t("topbar_client_view"),
-  }[view] || ""
-
   const handleSelectClient = (client) => { setSelectedClient(client); setView("detail") }
   const handleBack = () => { setSelectedClient(null); setView("overview") }
 
@@ -29,10 +20,12 @@ function AppContent() {
     <div className="admin-layout">
       <DemoBanner view={view} setView={setView} alertCount={2} />
       <main className="admin-main">
-        <div className="admin-topbar">
-          <div className="admin-topbar-title">{topbarTitle}</div>
-        </div>
         <div className="admin-content">
+          <img
+            src="/io_horizontal_black_10x.png"
+            alt="Investment Officer"
+            className="admin-logo"
+          />
           {view === "request" && <EnterpriseRequest onCancel={() => setView("overview")} />}
           {view === "overview" && <ClientOverview onSelectClient={handleSelectClient} />}
           {view === "detail" && selectedClient && <ClientDetail client={selectedClient} onBack={handleBack} />}

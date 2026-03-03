@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useI18n } from '../../i18n'
+import PocGuide from './PocGuide'
 
 export default function DemoBanner({ view, setView, alertCount }) {
   const { t, lang, setLang } = useI18n()
   const [open, setOpen] = useState(false)
+  const [guideOpen, setGuideOpen] = useState(false)
 
   const languages = [
     { code: 'en', label: 'EN' },
@@ -41,7 +43,7 @@ export default function DemoBanner({ view, setView, alertCount }) {
             </svg>
           </button>
 
-          <button className="demo-banner-guide-btn" onClick={() => alert('POC Guide — coming soon')}>
+          <button className="demo-banner-guide-btn" onClick={() => setGuideOpen(true)}>
             <svg width="14" height="10" viewBox="0 0 14 10" fill="none" style={{ marginRight: '0.375rem' }}>
               <rect x="0.5" y="0.5" width="13" height="9" rx="1.5" stroke="currentColor" strokeWidth="1"/>
               <path d="M4 3.5H10M4 6H8" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
@@ -91,6 +93,9 @@ export default function DemoBanner({ view, setView, alertCount }) {
           </div>
         </div>
       </div>
+
+      {/* POC Guide overlay */}
+      {guideOpen && <PocGuide onClose={() => setGuideOpen(false)} />}
     </div>
   )
 }
