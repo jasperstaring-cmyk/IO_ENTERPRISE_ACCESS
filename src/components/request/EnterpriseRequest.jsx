@@ -128,7 +128,7 @@ export default function EnterpriseRequest({ onCancel }) {
     if (query.length >= 3 && country) {
       const q = query.toLowerCase()
       const m = DB_COMPANIES.filter(c =>
-        c.name.toLowerCase().includes(q) || c.legal.toLowerCase().includes(q)
+        (c.name.toLowerCase().includes(q) || c.legal.toLowerCase().includes(q)) && c.country === country
       )
       setResults(m)
       setShowResults(m.length > 0)
@@ -150,6 +150,7 @@ export default function EnterpriseRequest({ onCancel }) {
     return (
       <>
         <div className="reg-main" style={{ maxWidth: 600, textAlign: 'center', padding: '3rem 2rem' }}>
+          <img src="/io_horizontal_black_10x.png" alt="Investment Officer" style={{ height: 26, marginBottom: '1.5rem' }} />
           <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>&#9989;</div>
           <h2 className="wizard-step-title">{t('req_submitted_title')}</h2>
           <p className="detail-card-sub" style={{ maxWidth: 'none', marginBottom: '1.5rem' }}>
@@ -166,13 +167,10 @@ export default function EnterpriseRequest({ onCancel }) {
     <>
       {/* Left: form in white card */}
       <div className="reg-main">
-        <div style={{ marginBottom: '0.25rem' }}>
-          <span className="badge badge-green" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>
-            {t('req_badge')}
-          </span>
-        </div>
+        <img src="/io_horizontal_black_10x.png" alt="Investment Officer" className="admin-logo" style={{ marginBottom: '1.25rem' }} />
+        <div className="req-badge">{t('req_badge')}</div>
         <h2 className="reg-step-title">{t('topbar_request')}</h2>
-        <p className="reg-step-subtitle">{t('req_form_intro')}</p>
+        <p className="reg-step-sub">{t('req_form_intro')}</p>
 
         {/* Section 1: Organisation */}
         <div className="section-title">{t('req_org_title')}</div>
@@ -332,12 +330,14 @@ export default function EnterpriseRequest({ onCancel }) {
 
         {/* Submit */}
         <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--gray-200)' }}>
-          <div className="alert alert-info" style={{ marginBottom: '1rem' }}>
+          <div className="alert alert-info" style={{ marginBottom: '1.25rem' }}>
             {t('req_review_note')}
           </div>
-          <div className="reg-nav-bar">
-            <button className="btn-back" onClick={onCancel}>{t('btn_cancel')}</button>
-            <button className="btn-primary btn-full" disabled={!canSubmit} onClick={() => setSubmitted(true)}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <button className="btn-back" onClick={onCancel} style={{ flexShrink: 0 }}>
+              <svg width="8" height="12" viewBox="0 0 8 12" fill="none"><path d="M7 1L2 6L7 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            </button>
+            <button className="btn-red" disabled={!canSubmit} onClick={() => setSubmitted(true)}>
               {t('req_submit')}
             </button>
           </div>

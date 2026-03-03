@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { I18nProvider, useI18n } from "./i18n"
+import { ENTERPRISE_CLIENTS } from "./data"
 import DemoBanner from "./components/shared/DemoBanner"
 import ClientOverview from "./components/admin/ClientOverview"
 import ClientDetail from "./components/admin/ClientDetail"
@@ -12,6 +13,7 @@ function AppContent() {
   const { t } = useI18n()
   const [view, setView] = useState("request")
   const [selectedClient, setSelectedClient] = useState(null)
+  const [demoClient, setDemoClient] = useState(ENTERPRISE_CLIENTS.find(c => c.sso) || ENTERPRISE_CLIENTS[0])
 
   const handleSelectClient = (client) => { setSelectedClient(client); setView("detail") }
   const handleBack = () => { setSelectedClient(null); setView("overview") }
@@ -20,10 +22,9 @@ function AppContent() {
   if (view === "request") {
     return (
       <div className="admin-layout">
-        <DemoBanner view={view} setView={setView} alertCount={2} />
+        <DemoBanner view={view} setView={setView} alertCount={2} demoClient={demoClient} setDemoClient={setDemoClient} />
         <main className="admin-main">
           <div className="req-page-wrapper">
-            <img src="/io_horizontal_black_10x.png" alt="Investment Officer" className="admin-logo" />
             <div className="req-two-col">
               <EnterpriseRequest onCancel={() => setView("overview")} />
             </div>
@@ -33,10 +34,20 @@ function AppContent() {
     )
   }
 
-  // All admin screens share the standard layout
+  // Client Admin View gets its own full layout (IO account pattern)
+  if (view === "client-view") {
+    return (
+      <div className="admin-layout">
+        <DemoBanner view={view} setView={setView} alertCount={2} demoClient={demoClient} setDemoClient={setDemoClient} />
+        <ClientAdminView demoClient={demoClient} />
+      </div>
+    )
+  }
+
+  // All IO admin screens share the standard layout
   return (
     <div className="admin-layout">
-      <DemoBanner view={view} setView={setView} alertCount={2} />
+      <DemoBanner view={view} setView={setView} alertCount={2} demoClient={demoClient} setDemoClient={setDemoClient} />
       <main className="admin-main">
         <div className="admin-content">
           <img src="/io_horizontal_black_10x.png" alt="Investment Officer" className="admin-logo" />
@@ -44,7 +55,6 @@ function AppContent() {
           {view === "detail" && selectedClient && <ClientDetail client={selectedClient} onBack={handleBack} />}
           {view === "wizard" && <IntakeWizard onComplete={() => setView("overview")} onCancel={() => setView("overview")} />}
           {view === "alerts" && <AlertsDashboard onViewClient={handleSelectClient} />}
-          {view === "client-view" && <ClientAdminView />}
         </div>
       </main>
     </div>
