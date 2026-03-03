@@ -640,3 +640,199 @@
   border-top: 1px solid var(--gray-200);
   margin: 1.5rem 0;
 }
+
+
+/* =============================================================================
+   ENTERPRISE REQUEST — sidebar styles (matches registration POC)
+   ============================================================================= */
+
+/* Visual header (navy gradient placeholder with device silhouettes) */
+.req-sidebar-visual {
+  background: linear-gradient(135deg, var(--navy) 0%, #1B3A5C 100%);
+  border-radius: 10px;
+  min-height: 140px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.req-sidebar-visual-inner {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  padding: 1.5rem;
+  opacity: 0.3;
+}
+.req-sidebar-device {
+  background: rgba(255,255,255,0.3);
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.req-sidebar-laptop {
+  width: 100px;
+  height: 65px;
+  border-radius: 4px 4px 0 0;
+  border-bottom: 3px solid rgba(255,255,255,0.2);
+}
+.req-sidebar-phone {
+  width: 32px;
+  height: 56px;
+  border-radius: 6px;
+}
+
+/* Plan dropdown-like label */
+.req-sidebar-plan-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin-bottom: 0.25rem;
+}
+.req-sidebar-plan-name {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--navy);
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 6px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.req-sidebar-plan-name::after {
+  content: '';
+  width: 12px;
+  height: 8px;
+  background: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%238A8A82' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+}
+
+/* Price */
+.req-sidebar-price-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin-bottom: 0.125rem;
+}
+.req-sidebar-price {
+  font-family: var(--font-sans);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 0.125rem;
+}
+.req-sidebar-price-note {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  margin-bottom: 1.25rem;
+}
+
+/* Green CTA banner */
+.req-sidebar-cta {
+  background: var(--green);
+  border-radius: 8px;
+  padding: 0.875rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+/* Features list */
+.req-sidebar-features-label {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin-bottom: 0.75rem;
+}
+.req-sidebar-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+  line-height: var(--lh-body);
+}
+.req-sidebar-check {
+  color: var(--red);
+  font-size: 0.875rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* Help card */
+.req-sidebar-help {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: box-shadow 0.15s;
+}
+.req-sidebar-help:hover {
+  box-shadow: 0 4px 20px rgba(12,24,46,0.1);
+}
+.req-sidebar-help-icon {
+  font-size: 1.5rem;
+  width: 42px;
+  height: 42px;
+  background: var(--gray-100);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.req-sidebar-help-title {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.req-sidebar-help-sub {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+.req-sidebar-help-arrow {
+  margin-left: auto;
+  font-size: 1.5rem;
+  color: var(--gray-300);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================================
+   ENTERPRISE REQUEST — page layout (two-column like reg-container)
+   ============================================================================= */
+.req-page-wrapper {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+.req-two-col {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .req-two-col { grid-template-columns: 1fr; }
+  .req-two-col .reg-sidebar { display: none; }
+}

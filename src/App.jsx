@@ -16,17 +16,30 @@ function AppContent() {
   const handleSelectClient = (client) => { setSelectedClient(client); setView("detail") }
   const handleBack = () => { setSelectedClient(null); setView("overview") }
 
+  // Enterprise Request gets its own layout (two-column with sidebar)
+  if (view === "request") {
+    return (
+      <div className="admin-layout">
+        <DemoBanner view={view} setView={setView} alertCount={2} />
+        <main className="admin-main">
+          <div className="req-page-wrapper">
+            <img src="/io_horizontal_black_10x.png" alt="Investment Officer" className="admin-logo" />
+            <div className="req-two-col">
+              <EnterpriseRequest onCancel={() => setView("overview")} />
+            </div>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  // All admin screens share the standard layout
   return (
     <div className="admin-layout">
       <DemoBanner view={view} setView={setView} alertCount={2} />
       <main className="admin-main">
         <div className="admin-content">
-          <img
-            src="/io_horizontal_black_10x.png"
-            alt="Investment Officer"
-            className="admin-logo"
-          />
-          {view === "request" && <EnterpriseRequest onCancel={() => setView("overview")} />}
+          <img src="/io_horizontal_black_10x.png" alt="Investment Officer" className="admin-logo" />
           {view === "overview" && <ClientOverview onSelectClient={handleSelectClient} />}
           {view === "detail" && selectedClient && <ClientDetail client={selectedClient} onBack={handleBack} />}
           {view === "wizard" && <IntakeWizard onComplete={() => setView("overview")} onCancel={() => setView("overview")} />}
